@@ -1,4 +1,5 @@
 
+import { compose } from './compose';
 import { formatName } from './utils';
 describe('declaring variables etc with typescript', () => {
   describe('eventual typing', () => {
@@ -223,8 +224,14 @@ describe('declaring variables etc with typescript', () => {
 describe('higher order functions', () => {
   it('an example', () => {
     expect(formatName('Han', 'Solo')).toBe('Solo, Han');
-    expect(formatName('Han', 'Solo', (x) => x.toUpperCase())).toBe('SOLO, HAN');
-    const MakeFlashy = (s: string) => `***${s}***`;
-    expect(formatName('Han', 'Solo', MakeFlashy)).toBe('***Solo, Han***');
+    const makeNameUpper = (s: string) => s.toUpperCase();
+    expect(
+      formatName('Han', 'Solo', makeNameUpper)).toBe('SOLO, HAN');
+    const makeFlashy = (s: string) => `***${s}***`;
+    expect(formatName('Han', 'Solo', makeFlashy)).toBe('***Solo, Han***');
+    // const doBoth = (s: string) => makeFlashy(makeNameUpper(s));
+    const doBoth = compose(makeNameUpper, makeFlashy);
+    expect(formatName('Han', 'Solo', doBoth)).toBe('***SOLO, HAN***');
+
   });
 });
