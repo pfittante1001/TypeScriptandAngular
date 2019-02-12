@@ -5,7 +5,7 @@
             (click)="markCompleted(item)"
            *ngIf="!item.completed"
            class="btn btn-sm btn-primary"
-           value="X"><span [ngClass]="{'completed': item.completed}">{{ item.description}}</span>
+           value="X"><span [ngClass]="{'completed': item.completed}">{{item.description}}</span>
   </li>
 
 </ul>

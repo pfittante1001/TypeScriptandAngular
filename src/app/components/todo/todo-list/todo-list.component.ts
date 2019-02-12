@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TodoItem, TodoList } from '../models';
 
 @Component({
@@ -8,12 +8,7 @@ import { TodoItem, TodoList } from '../models';
 })
 export class TodoListComponent implements OnInit {
 
-  list: TodoList = {
-    items: [
-      {id: '1', description: 'shovel snow', completed: false},
-      {id: '2', description: 'change oil', completed: true},
-    ]
-  };
+  @Input() list: TodoList;
   constructor() { }
 
   ngOnInit() {

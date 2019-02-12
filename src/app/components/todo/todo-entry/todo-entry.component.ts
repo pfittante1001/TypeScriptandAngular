@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-todo-entry',
@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo-entry.component.css']
 })
 export class TodoEntryComponent implements OnInit {
+@Output() itemAdded = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {
   }
-
+  addItem(item: HTMLInputElement) {
+    console.log(item.value);
+    this.itemAdded.emit(item.value);
+    item.value = '';
+    item.focus();
+    // put cursor back in focus
+  }
 }
